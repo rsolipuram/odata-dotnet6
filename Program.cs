@@ -28,22 +28,20 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.OpenApi.Models;
 using todo;
-using todo;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IDocumentDBRepository<todo.Models.Item>>(o => new DocumentDBRepository<todo.Models.Item>());
-builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().AddRouteComponents(
+builder.Services.AddSingleton<IDocumentDBRepository<todo.Models.Item>, DocumentDBRepository<todo.Models.Item>>();
+builder.Services.AddControllers().AddOData(options => options.Select().Filter().Count().SetMaxTop(null).OrderBy().AddRouteComponents(
             routePrefix: "odata",
             model: Startup.GetEdmModel()));
 
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

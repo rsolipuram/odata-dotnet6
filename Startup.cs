@@ -40,7 +40,8 @@ namespace todo
         public static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Item>("Items");
+            builder.EntitySet<Item>("Items")
+                   .EntityType.HasKey(x => x.Id);
             return builder.GetEdmModel();
         }
 

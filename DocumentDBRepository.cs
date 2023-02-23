@@ -12,16 +12,14 @@
     
     public class DocumentDBRepository<T> : IDocumentDBRepository<T> where T : class
     {
-       
         private readonly string Endpoint = "https://alohasupper.documents.azure.com:443/";
-        private readonly string Key = "IaafQ3rep8Z1mts4k2lu11onz7rNJPbNn2pStRpV6RgEomKsJ1lyqnVWhMC4ZwWb8fHAp5bzlUi8ACDbbAJIiQ==";
         private readonly string DatabaseId = "ToDoList";
         private readonly string CollectionId = "Items";
         private DocumentClient client;
 
-        public DocumentDBRepository()
+        public DocumentDBRepository(IConfiguration configuration)
         {
-            this.client = new DocumentClient(new Uri(Endpoint), Key);
+            this.client = new DocumentClient(new Uri(Endpoint), configuration["CosmosDB:Key"]);
             CreateDatabaseIfNotExistsAsync().Wait();
             CreateCollectionIfNotExistsAsync().Wait();
         }
