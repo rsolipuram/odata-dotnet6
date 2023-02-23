@@ -26,7 +26,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 
-namespace quickstartcore
+namespace todo
 {
     public class Startup
     {
@@ -37,17 +37,17 @@ namespace quickstartcore
 
         public IConfiguration Configuration { get; }
 
-         public static IEdmModel GetEdmModel() 
-        { 
-            ODataConventionModelBuilder builder = new ODataConventionModelBuilder(); 
-            builder.EntitySet<Item>("Item"); 
-            return builder.GetEdmModel(); 
+        public static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Item>("Items");
+            return builder.GetEdmModel();
         }
 
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllersWithViews();
             // services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().AddRouteComponents(
             // routePrefix: "odata",

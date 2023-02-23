@@ -7,7 +7,7 @@
 // using Microsoft.Extensions.Hosting;
 // using Microsoft.Extensions.Logging;
 
-// namespace quickstartcore
+// namespace todo
 // {
 //     public class Program
 //     {
@@ -27,7 +27,7 @@
 
 using Microsoft.AspNetCore.OData;
 using Microsoft.OpenApi.Models;
-using quickstartcore;
+using todo;
 using todo;
 
 
@@ -36,15 +36,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IDocumentDBRepository<todo.Models.Item>>(o=>new DocumentDBRepository<todo.Models.Item>());
+builder.Services.AddSingleton<IDocumentDBRepository<todo.Models.Item>>(o => new DocumentDBRepository<todo.Models.Item>());
 builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().AddRouteComponents(
             routePrefix: "odata",
             model: Startup.GetEdmModel()));
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNet6WithOData", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

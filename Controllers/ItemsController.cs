@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using todo;
 using todo.Models;
 
-namespace quickstartcore.Controllers
+namespace todo.Controllers
 {
     [Produces("application/json")]
     [Route("api/Items")]
