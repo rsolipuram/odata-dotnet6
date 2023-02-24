@@ -40,6 +40,8 @@ builder.Services.AddControllers().AddOData(options => options.Select().Filter().
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 
@@ -57,12 +59,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Item}/{action=Index}/{id?}");
 
 app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AspNet2WithOData v1"));
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
 
 
 app.Run();

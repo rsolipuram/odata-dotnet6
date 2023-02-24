@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.OData.Formatter;
 
 namespace todo.Controllers
 {
-    public class ItemsController : ODataController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ItemsController : ControllerBase
     {
         private readonly IDocumentDBRepository<Item> Respository;
         public ItemsController(IDocumentDBRepository<Item> Respository)
@@ -19,6 +21,7 @@ namespace todo.Controllers
 
         // GET: api/Itemsx
         [EnableQuery()]
+        [HttpGet]
         public async Task<IEnumerable<Item>> Get()
         {
             return await Respository.GetItemsAsync(d => !d.Completed);
@@ -26,14 +29,29 @@ namespace todo.Controllers
 
         //GET: api/Items/5  
         [EnableQuery()]
+        [HttpGet("{id}")]
         public async Task<Item> Get([FromODataUri] string key)
         {
             return await Respository.GetItemAsync(key);
         }
 
         //Put api/Items/5
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Item item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+            await Respository.CreateItemAsync(item);
+
+            return Created("items", item);
+        }
+
+        //Put api/Items/5
         [EnableQuery()]
-        public async Task<IActionResult> Put([FromODataUri] string key, [FromBody] Item item)
+        [HttpPost("/odata/items('{key}')")]
+        public async Task<IActionResult> Post(string key, [FromBody] Item item)
         {
             if (item == null || item.Id != key)
             {
@@ -48,8 +66,7 @@ namespace todo.Controllers
 
             await Respository.UpdateItemAsync(key, item);
 
-            return new NoContentResult();
+            return Created("items", item);
         }
     }
-
-}   
+}

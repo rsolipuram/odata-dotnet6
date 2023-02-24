@@ -9,10 +9,10 @@
     using Microsoft.Azure.Documents.Client;
     using Microsoft.Azure.Documents.Linq;
 
-    
+
     public class DocumentDBRepository<T> : IDocumentDBRepository<T> where T : class
     {
-        private readonly string Endpoint = "https://alohasupper.documents.azure.com:443/";
+        private readonly string Endpoint = "https://playgroundcosmoos.documents.azure.com:443/";
         private readonly string DatabaseId = "ToDoList";
         private readonly string CollectionId = "Items";
         private DocumentClient client;
@@ -28,7 +28,7 @@
         {
             try
             {
-                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
+                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), new RequestOptions { PartitionKey = new PartitionKey(id) });
                 return (T)(dynamic)document;
             }
             catch (DocumentClientException e)
