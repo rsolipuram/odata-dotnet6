@@ -18,6 +18,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Completed)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiamId)
+        </th>
+        
         <th></th>
     </tr>
 
@@ -31,6 +35,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Completed)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.CiamId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

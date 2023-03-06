@@ -16,5 +16,8 @@
 
         [JsonProperty(PropertyName = "isComplete")]
         public bool Completed { get; set; }
+
+        [JsonProperty(PropertyName = "ciamId")]
+        public bool CiamId { get; set; }
     }
 }

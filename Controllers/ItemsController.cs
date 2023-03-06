@@ -29,8 +29,8 @@ namespace todo.Controllers
 
         //GET: api/Items/5  
         [EnableQuery()]
-        [HttpGet("{id}")]
-        public async Task<Item> Get([FromODataUri] string key)
+        [HttpGet("{key}")]
+        public async Task<Item> Get(string key)
         {
             return await Respository.GetItemAsync(key);
         }
