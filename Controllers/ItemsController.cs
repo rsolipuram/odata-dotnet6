@@ -68,5 +68,25 @@ namespace todo.Controllers
 
             return Created("items", item);
         }
+
+        //Put api/Items/5
+        [HttpPatch("/odata/items/{key}")]
+        public async Task<IActionResult> Update(string key, [FromBody] Item item)
+        {
+            if (item == null || item.Id != key)
+            {
+                return BadRequest();
+            }
+
+            var todo = await Respository.GetItemAsync(key);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            await Respository.UpdateItemAsync(key, item);
+
+            return Created("items", item);
+        }
     }
 }
