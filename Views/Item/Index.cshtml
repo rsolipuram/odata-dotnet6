@@ -21,6 +21,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CiamId)
         </th>
+          <th>
+            @Html.DisplayNameFor(model => model.AssignedTo)
+        </th>
         
         <th></th>
     </tr>
@@ -38,6 +41,9 @@
         </td>
          <td>
             @Html.DisplayFor(modelItem => item.CiamId)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.AssignedTo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

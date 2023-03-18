@@ -18,6 +18,9 @@
         public bool Completed { get; set; }
 
         [JsonProperty(PropertyName = "ciamId")]
-        public bool CiamId { get; set; }
+        public string CiamId { get; set; }
+
+        [JsonProperty(PropertyName = "assignedTo")]
+        public string AssignedTo { get; set; }
     }
 }

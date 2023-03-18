@@ -18,7 +18,7 @@
             var items = await Respository.GetItemsAsync(d => !d.Completed);
             return View(items);
         }
-        
+
 
 #pragma warning disable 1998
         [ActionName("Create")]
@@ -31,7 +31,7 @@
         [HttpPost]
         [ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync([Bind("Id,Name,Description,Completed")] Item item)
+        public async Task<ActionResult> CreateAsync([Bind("Id,Name,Description,Completed,CiamId,AssignedTo")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -45,7 +45,7 @@
         [HttpPost]
         [ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] Item item)
+        public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed,CiamId,AssignedTo")] Item item)
         {
             if (ModelState.IsValid)
             {

@@ -6,6 +6,9 @@ using todo;
 using todo.Models;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.AspNetCore.OData.Query.;
+using System.Text.RegularExpressions;
+using System.Linq.Expressions;
 
 namespace todo.Controllers
 {
@@ -24,7 +27,7 @@ namespace todo.Controllers
         [HttpGet]
         public async Task<IEnumerable<Item>> Get()
         {
-            return await Respository.GetItemsAsync(d => !d.Completed);
+            return await Respository.GetItemsAsync(_ => true);
         }
 
         //GET: api/Items/5  
@@ -32,6 +35,7 @@ namespace todo.Controllers
         [HttpGet("{key}")]
         public async Task<Item> Get(string key)
         {
+
             return await Respository.GetItemAsync(key);
         }
 
