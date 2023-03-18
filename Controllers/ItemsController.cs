@@ -6,7 +6,6 @@ using todo;
 using todo.Models;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.AspNetCore.OData.Formatter;
-using Microsoft.AspNetCore.OData.Query.;
 using System.Text.RegularExpressions;
 using System.Linq.Expressions;
 
